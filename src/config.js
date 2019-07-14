@@ -1,10 +1,12 @@
+
+
 export default {
   apiUrl: 'http://joeylin.net/api/',
 };
 const siteConfig = {
-  siteName: 'joeylin.net',
+  siteName: 'Modacity',
   siteIcon: 'ion-beer',
-  footerText: 'Isomorphic ©2017 Created with LOVE by Joey Lin',
+  footerText: 'Modacity, Inc. is a Delaware C Corporation launched in 2017 at Founder Institute San Francisco.',
 };
 
 const themeConfig = {
@@ -47,14 +49,18 @@ const Auth0Config = {
     },
   },
 };
+
 const firebaseConfig = {
-  apiKey: '',
-  authDomain: '',
-  databaseURL: '',
-  projectId: '',
-  storageBucket: '',
-  messagingSenderId: '',
+  apiKey: "AIzaSyAf2MwxmQ_-1wJoI-gg1v9Xw5usI61WxRA",
+  authDomain: "modacity-dev.firebaseapp.com",
+  databaseURL: "https://modacity-dev.firebaseio.com",
+  projectId: "modacity-dev",
+  storageBucket: "modacity-dev.appspot.com",
+  messagingSenderId: "935927862831",
+  appId: "1:935927862831:web:6f70aad12f53a9f1"
 };
+
+
 const googleConfig = {
   apiKey: '', //
 };

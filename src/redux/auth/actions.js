@@ -3,8 +3,9 @@ const authActons = {
   LOGOUT: 'LOGOUT',
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_ERROR: 'LOGIN_ERROR',
-  login: () => ({
+  login: (email, pw) => ({
     type: authActons.LOGIN_REQUEST,
+    data: {email:email, pw:pw}
   }),
   logout: () => ({
     type: authActons.LOGOUT,

@@ -4,11 +4,7 @@ import { Layout } from 'antd';
 import appActions from '../../redux/app/actions';
 import TopbarWrapper from './topbar.style';
 import {
-  TopbarNotification,
-  TopbarMessage,
-  TopbarSearch,
-  TopbarUser,
-  TopbarAddtoCart,
+  TopbarUser
 } from '../../components/topbar';
 
 const { Header } = Layout;
@@ -16,7 +12,7 @@ const { toggleCollapsed } = appActions;
 
 class Topbar extends Component {
   render() {
-    const { toggleCollapsed, url, customizedTheme, locale } = this.props;
+    const { toggleCollapsed, customizedTheme, locale } = this.props;
     const collapsed = this.props.collapsed && !this.props.openDrawer;
     const styling = {
       background: customizedTheme.backgroundColor,
@@ -42,27 +38,6 @@ class Topbar extends Component {
           </div>
 
           <ul className="isoRight">
-            <li className="isoSearch">
-              <TopbarSearch locale={locale} />
-            </li>
-
-            <li
-              onClick={() => this.setState({ selectedItem: 'notification' })}
-              className="isoNotify">
-              <TopbarNotification locale={locale} />
-            </li>
-
-            <li
-              onClick={() => this.setState({ selectedItem: 'message' })}
-              className="isoMsg">
-              <TopbarMessage locale={locale} />
-            </li>
-            <li
-              onClick={() => this.setState({ selectedItem: 'addToCart' })}
-              className="isoCart">
-              <TopbarAddtoCart url={url} locale={locale} />
-            </li>
-
             <li
               onClick={() => this.setState({ selectedItem: 'user' })}
               className="isoUser">

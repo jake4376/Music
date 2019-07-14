@@ -1,17 +1,18 @@
-import { all, takeEvery, put, fork } from 'redux-saga/effects';
+import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import { clearToken } from '../../helpers/utility';
 import actions from './actions';
-
-const fakeApiCall = true; // auth0 or express JWT
+import { auth_talken } from '../../api/auth';
 
 export function* loginRequest() {
-  yield takeEvery('LOGIN_REQUEST', function*() {
-    if (fakeApiCall) {
+  yield takeEvery('LOGIN_REQUEST', function*(data) {
+    const email = data.data.email;
+    const pw = data.data.pw;
+    const result = yield call(auth_talken, email, pw);
+    if (result) {
       yield put({
         type: actions.LOGIN_SUCCESS,
-        token: 'secret token',
-        profile: 'Profile'
+        token: result,
       });
     } else {
       yield put({ type: actions.LOGIN_ERROR });

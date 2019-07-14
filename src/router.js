@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import App from './containers/App/App';
 import asyncComponent from './helpers/AsyncFunc';
-import Auth0 from './helpers/auth0';
 
 const RestrictedRoute = ({ component: Component, isLoggedIn, ...rest }) => (
   <Route
@@ -43,38 +42,6 @@ const PublicRoutes = ({ history, isLoggedIn }) => {
           exact
           path={'/signin'}
           component={asyncComponent(() => import('./containers/Page/signin'))}
-        />
-        <Route
-          exact
-          path={'/signup'}
-          component={asyncComponent(() => import('./containers/Page/signup'))}
-        />
-        <Route
-          exact
-          path={'/forgotpassword'}
-          component={asyncComponent(() =>
-            import('./containers/Page/forgotPassword'))}
-        />
-        <Route
-          exact
-          path={'/resetpassword'}
-          component={asyncComponent(() =>
-            import('./containers/Page/resetPassword'))}
-        />
-        {/* <Route
-          exact
-          path={'/comingSoon'}
-          component={asyncComponent(() =>
-            import('./containers/Page/comingSoon')
-          )}
-        /> */
-        }
-
-        <Route
-          path="/auth0loginCallback"
-          render={props => {
-            Auth0.handleAuthentication(props);
-          }}
         />
         <RestrictedRoute
           path="/dashboard"

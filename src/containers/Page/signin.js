@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Input from '../../components/uielements/input';
-import Checkbox from '../../components/uielements/checkbox';
 import Button from '../../components/uielements/button';
+
 import authAction from '../../redux/auth/actions';
-import Auth0 from '../../helpers/auth0';
-import Firebase from '../../helpers/firebase';
-import FirebaseLogin from '../../components/firebase';
+
 import IntlMessages from '../../components/utility/intlMessages';
 import SignInStyleWrapper from './signin.style';
 
@@ -16,6 +14,9 @@ const { login } = authAction;
 class SignIn extends Component {
   state = {
     redirectToReferrer: false,
+    email: '',
+    pw: '',
+    fullset: false
   };
   componentWillReceiveProps(nextProps) {
     if (
@@ -25,16 +26,31 @@ class SignIn extends Component {
       this.setState({ redirectToReferrer: true });
     }
   }
+
+  handleInput = (e, type) => {
+    this.setState({fullset: false})
+    if ( type === "email" ) {
+      this.setState({email: e.target.value});
+    }
+    if ( type === "password" ) {
+      this.setState({pw: e.target.value});
+    }
+  }
+
   handleLogin = () => {
     const { login } = this.props;
-    login();
-    this.props.history.push('/dashboard');
+    const {email, pw} = this.state;
+    if ( !!email && !!pw ) {
+      login(email, pw);
+    } else {
+      this.setState({fullset: true});
+    }
   };
   render() {
     const from = { pathname: '/dashboard' };
-    const { redirectToReferrer } = this.state;
-
-    if (redirectToReferrer) {
+    const { fullset } = this.state;
+    const { isLoggedIn } = this.props;
+    if ( isLoggedIn ) {
       return <Redirect to={from} />;
     }
     return (
@@ -42,60 +58,27 @@ class SignIn extends Component {
         <div className="isoLoginContentWrapper">
           <div className="isoLoginContent">
             <div className="isoLogoWrapper">
-              <Link to="/dashboard">
+              <Link to="/">
                 <IntlMessages id="page.signInTitle" />
               </Link>
             </div>
 
             <div className="isoSignInForm">
+              {
+                fullset && <span style={{color: "red"}}>Your account or password is incorrect</span>
+              }
               <div className="isoInputWrapper">
-                <Input size="large" placeholder="Username" />
+                <Input size="large" placeholder="Email" onChange={e => this.handleInput(e, "email")} />
               </div>
 
               <div className="isoInputWrapper">
-                <Input size="large" type="password" placeholder="Password" />
+                <Input size="large" type="password" placeholder="Password" onChange={e => this.handleInput(e, "password")} />
               </div>
 
               <div className="isoInputWrapper isoLeftRightComponent">
-                <Checkbox>
-                  <IntlMessages id="page.signInRememberMe" />
-                </Checkbox>
                 <Button type="primary" onClick={this.handleLogin}>
                   <IntlMessages id="page.signInButton" />
                 </Button>
-              </div>
-
-              <p className="isoHelperText">
-                <IntlMessages id="page.signInPreview" />
-              </p>
-
-              <div className="isoInputWrapper isoOtherLogin">
-                <Button onClick={this.handleLogin} type="primary btnFacebook">
-                  <IntlMessages id="page.signInFacebook" />
-                </Button>
-                <Button onClick={this.handleLogin} type="primary btnGooglePlus">
-                  <IntlMessages id="page.signInGooglePlus" />
-                </Button>
-
-                {Auth0.isValid &&
-                  <Button
-                    onClick={() => {
-                      Auth0.login(this.handleLogin);
-                    }}
-                    type="primary btnAuthZero"
-                  >
-                    <IntlMessages id="page.signInAuth0" />
-                  </Button>}
-
-                {Firebase.isValid && <FirebaseLogin login={this.handleLogin} />}
-              </div>
-              <div className="isoCenterComponent isoHelperWrapper">
-                <Link to="/forgotpassword" className="isoForgotPass">
-                  <IntlMessages id="page.signInForgotPass" />
-                </Link>
-                <Link to="/signup">
-                  <IntlMessages id="page.signInCreateAccount" />
-                </Link>
               </div>
             </div>
           </div>

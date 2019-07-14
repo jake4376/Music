@@ -14,6 +14,20 @@ export function getToken() {
   }
 }
 
+export function clearUsers() {
+  localStorage.removeItem('users');
+}
+
+export function getUsers() {
+  try {
+    const users = localStorage.getItem('users');
+    return new Map({users});
+  } catch (err) {
+    clearUsers();
+    return new Map();
+  }
+}
+
 export function timeDifference(givenTime) {
   givenTime = new Date(givenTime);
   const milliseconds = new Date().getTime() - givenTime.getTime();

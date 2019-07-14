@@ -521,7 +521,7 @@
   "page500.subTitle": "Internal Server Error",
   "page500.description": "Something went wrong. Please try again later.",
   "page500.backButton": "BACK HOME",
-  "page.forgetPassTitle": "Isomorphic",
+  "page.forgetPassTitle": "Modacity",
   "page.forgetPassSubTitle": "Forgot Password?",
   "page.forgetPassDescription":
     "Enter your email and we send you a reset link.",
@@ -530,7 +530,7 @@
   "page.resetPassSubTitle": "Reset Password",
   "page.resetPassDescription": "Enter new password and confirm it.",
   "page.resetPassSave": "Save",
-  "page.signInTitle": "Isomorphic",
+  "page.signInTitle": "Modacity",
   "page.signInRememberMe": "Remember me",
   "page.signInButton": "Sign in",
   "page.signInPreview":

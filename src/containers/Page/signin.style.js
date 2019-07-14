@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { palette } from 'styled-theme';
-import bgImage from '../../image/sign.jpg';
+import bgImage from '../../image/sign1.jpg';
 import WithDirection from '../../config/withDirection';
 
 const SignInStyleWrapper = styled.div`
@@ -8,7 +8,7 @@ const SignInStyleWrapper = styled.div`
   min-height: 100vh;
   height: 100vh;
   display: flex;
-  justify-content: flex-end;
+  justify-content: center;
   align-items: center;
   position: relative;
   background: url(${bgImage}) no-repeat center center;
@@ -19,7 +19,6 @@ const SignInStyleWrapper = styled.div`
     width: 100%;
     height: 100%;
     display: flex;
-    background-color: rgba(0, 0, 0, 0.6);
     position: absolute;
     z-index: 1;
     top: 0;
@@ -28,9 +27,7 @@ const SignInStyleWrapper = styled.div`
   }
 
   .isoLoginContentWrapper {
-    width: 500px;
-    height: 100%;
-    overflow-y: auto;
+    width: 400px;
     z-index: 10;
     position: relative;
   }
@@ -39,9 +36,10 @@ const SignInStyleWrapper = styled.div`
     min-height: 100%;
     display: flex;
     flex-direction: column;
-    padding: 70px 50px;
     position: relative;
-    background-color: #ffffff;
+    background: rgba(0,0,0,0.3);
+    padding: 50px;
+    border-radius: 20px;
 
     @media only screen and (max-width: 767px) {
       width: 100%;
