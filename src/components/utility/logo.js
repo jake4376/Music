@@ -18,7 +18,7 @@ export default function({ collapsed }) {
           </div>
         : <h3>
             <Link to="/dashboard">
-              <img src={Logo} alt="Modacity" width="100%" />
+              <span>Modacity</span>
             </Link>
           </h3>}
     </div>
