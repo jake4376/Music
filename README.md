@@ -1,4 +1,2 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 7a844495cd8f6b07fbae63b3c82450028ff5799c
+Node Version:
+Npm Version:
