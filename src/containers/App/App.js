@@ -12,7 +12,6 @@ import userActions from '../../redux/users/actions';
 
 import Sidebar from '../Sidebar/Sidebar';
 import Topbar from '../Topbar/Topbar';
-import ThemeSwitcher from '../../containers/ThemeSwitcher';
 import AppRouter from './AppRouter';
 import { siteConfig } from '../../config.js';
 import { AppLocale } from '../../dashApp';
@@ -77,7 +76,6 @@ export class App extends Component {
                     </Footer>
                   </Layout>
                 </Layout>
-                <ThemeSwitcher />
               </Layout>
             </AppHolder>
           </ThemeProvider>
