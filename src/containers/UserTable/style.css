@@ -1,4 +1,4 @@
-#customers {
+.customer {
     font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
     position: relative;
     border-collapse: collapse;
@@ -8,22 +8,66 @@
     transform: translateY(45px);
 }
   
-  #customers td, #customers th {
+.customer td, #customers th {
     border: 1px solid #ddd;
     padding: 8px;
-  }
-  
-  #customers tr:nth-child(even){background-color: #f2f2f2;}
-  
-  #customers tr:hover {background-color: #ddd;}
-  
-  #customers th {
-    padding-top: 12px;
-    padding-bottom: 12px;
+}
+
+.customer tr:nth-child(even){background-color: #f2f2f2;}
+.customer th:first-of-type {
+    width: 55%;
+    overflow: hidden;
+    text-overflow: clip;
+}
+.customer tr:hover {background-color: #ddd;}
+
+.customer th {
+    padding-top: 5px;
+    padding-bottom: 5px;
     text-align: center;
     background-color: #2f3640;
     color: white;
-  }
+}
+.customer td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+.customers {
+    font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+    position: relative;
+    border-collapse: collapse;
+    width: 100%;
+    font-size: 20px;
+    text-align: center;
+    transform: translateY(45px);
+}
+  
+.customers td, #customers th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.customers tr:nth-child(even){background-color: #f2f2f2;}
+
+.customers tr:hover {background-color: #ddd;}
+
+.customers th {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+    background-color: #2f3640;
+    color: white;
+}
+.customers td {
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;
+}
+
+
+
 .searchBox {
     position: absolute;
     background: #2f3640;
@@ -71,12 +115,11 @@
 }
 } */
 .button_block {
-    position: relative;
+    position: absolute;
     transform: translateY(60px);
-    margin-top: 10px;
     font-size: 23px;
-    display: flex;
-    justify-content: center;
+    left: 50%;
+    bottom: 140px;
 }
 .button_block button {
     margin-left: 5px;
@@ -102,4 +145,63 @@ button:disabled {
 }
 .tableBox {
     margin: 20px;
+}
+.logo {
+    width: 120px;
+    height: 31px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 16px 24px 16px 0;
+    float: left;
+}
+.header_user {
+    float: left;
+    color: white;
+    font-size: 17px;
+    margin-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.header_user1 {
+    float: left;
+    color: white;
+    font-size: 17px;
+    margin-right: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    background-color: #4482FF;
+}
+
+.header_user:focus {
+    background-color: #4482FF;
+}
+.header_user:active {
+    background-color: #4482FF;
+}
+.header_user:hover {
+    background-color: #4482FF;
+}
+.header_user:focus-within {
+    background-color: #4482FF;
+}
+
+.flooo {
+    float: right;
+    margin-right: 300px;
+}
+button:focus {
+    outline: none;
+}
+.notFoundData {
+    outline: none;
+    font-size: 40px;
+    color: red;
+    border: none;
+}
+.backbutton {
+    color: rgba(0, 0, 0, 0.4);
+    font-size: 18px;
+    float: right;
+    margin-right: 20px;
+    margin-top: 20px;
 }

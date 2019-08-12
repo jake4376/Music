@@ -1,11 +1,12 @@
-import React from "react";
-import { connect } from 'react-redux';
-import './style.css';
-import { Icon } from 'antd';
-import userActions from '../../redux/users/actions';
+import React from 'react';
+import { connect } from 'react-redux'
+import './style.css'
+import { Icon } from 'antd'
+import userActions from '../../redux/users/actions'
 import Find from './Find'
+import User from './User'
 
-const { getoneuser, pagechange } =userActions;
+const { getoneuser, pagechange, getpractise, requestPractise, preSuccess } =userActions;
 
 class UserTable extends React.Component {
   
@@ -14,7 +15,10 @@ class UserTable extends React.Component {
     this.state = {
       searchText: "",
       pagenumber: 1,
-      searchstart: false
+      searchstart: false,
+      show: false,
+      oldEmail: '',
+      practise: []
     };
   }
 
@@ -53,12 +57,34 @@ class UserTable extends React.Component {
     this.setState({pagenumber: this.state.pagenumber+1})
   }
 
+  showUser = (email) => {
+    const { oldEmail } = this.state
+    if ( oldEmail === email) {
+      this.setState({ show: true})
+      return
+    } else {
+      this.props.requestPractise()
+      this.props.getpractise(email)
+      this.setState({oldEmail: email})
+    }
+    this.setState({show: true})
+  }
+  closeUser = () => {
+    this.props.preSuccess()
+    this.setState({show: false})
+  }
   render() {
-    const users = this.props.users;
-    const oneuser = this.props.oneuser
+    const { users, oneuser, practise, error } = this.props
     const results = (users) ? users : [];
     const pagenumber = this.state.pagenumber;
-    let prev_button = true
+    const { show } = this.state
+    let prev_button = true;
+    if (show && !!practise) {
+      return (
+        <User practise={practise} closeUser={this.closeUser} error={error} />
+      )
+    }
+
     if (pagenumber > 1) {
       prev_button = false
     }
@@ -76,7 +102,7 @@ class UserTable extends React.Component {
           </button>
         </div>
         <div>
-          <table id="customers">
+          <table className="customers">
             <thead>
               <tr>
                 <th>#</th>
@@ -104,7 +130,7 @@ class UserTable extends React.Component {
                 )
                 : 
                 (results.length > 0) && results.map((item, key) => 
-                    <tr key={key}>
+                    <tr key={key} onClick={() => this.showUser(item.email)}>
                       <td>{key+1}</td>
                       <td>{item.email}</td>
                       <td>
@@ -139,7 +165,9 @@ class UserTable extends React.Component {
 export default connect(
   state => ({
     users: state.Users.get('users'),
-    oneuser: state.Users.get('oneuser')
+    oneuser: state.Users.get('oneuser'),
+    practise: state.Users.get('practise'),
+    error: state.Users.get('error')
   }),
-  { getoneuser, pagechange }
+  { getoneuser, pagechange, getpractise, requestPractise, preSuccess }
 )(UserTable);

@@ -1,6 +1,6 @@
 import { all, takeEvery, put, fork, call } from 'redux-saga/effects';
 import actions from './actions';
-import { getUsers, getOneuser, pageChange } from '../../api/users';
+import { getUsers, getOneuser, pageChange, getPractise } from '../../api/users';
 
 export function* getusers() {
   yield takeEvery('GET_USERS', function*() {
@@ -42,10 +42,28 @@ export function * pagechange() {
   })
 }
 
+export function * getpractise() {
+  yield takeEvery('GET_PRACTISE', function*(data) {
+    const result = yield call(getPractise, data.uid);
+    if (result) {
+      yield put({
+        type: actions.PRESUCCESS
+      })
+      yield put({
+        type: actions.GET_PRACTISESUCCESS,
+        practise: result
+      }) 
+    } else {
+      yield put({type: actions.USERS_ERROR});
+    }
+  });
+}
+
 export default function* rootSaga() {
   yield all([
     fork(getusers),
     fork(getoneuser),
-    fork(pagechange)
+    fork(pagechange),
+    fork(getpractise),
   ]);
 }

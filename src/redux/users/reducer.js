@@ -4,7 +4,10 @@ import actions from './actions';
 
 const initState = new Map({
   users: [],
-  oneuser: []
+  oneuser: [],
+  practise: [],
+  changePractise: false,
+  error: false
 });
 
 export default function authReducer(
@@ -16,6 +19,14 @@ export default function authReducer(
       return state.set('users', action.data);
     case actions.GET_ONESUCCESS:
       return state.set('oneuser', action.oneuser);
+    case actions.GET_PRACTISESUCCESS:
+      return state.set('practise', action.practise);
+    case actions.REQUEST:
+      return state.set('practise', [])
+    case actions.USERS_ERROR:
+      return state.set('error', true)
+    case actions.PRESUCCESS:
+      return state.set('error', false)
     default:
       return state;
   }
