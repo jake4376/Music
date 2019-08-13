@@ -11,7 +11,7 @@ import SidebarWrapper from './sidebar.style';
 import appActions from '../../redux/app/actions';
 import Logo from '../../components/utility/logo';
 import { rtl } from '../../config/withDirection';
-
+import Crown from '../../image/crown1.svg'
 const { Sider } = Layout;
 
 const {
@@ -145,6 +145,16 @@ class Sidebar extends Component {
                     <Icon type="user" />
                     <span className="nav-text">
                       Users
+                    </span>
+                  </span>
+                </Link>
+              </Menu.Item>
+              <Menu.Item key="framework">
+                <Link to={`${url}/frame`}>
+                  <span className="isoMenuHolder" style={submenuColor}>
+                    <img alt="king" src={Crown} className="kingImage" />
+                    <span className="nav-text">
+                      Frameworks
                     </span>
                   </span>
                 </Link>

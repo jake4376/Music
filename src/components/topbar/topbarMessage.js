@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import IntlMessages from '../utility/intlMessages';
 import TopbarDropdownWrapper from './topbarDropdown.style';
 
-import Image from '../../image/user3.png';
-
 const demoMassage = [
   {
     id: 1,
@@ -65,7 +63,7 @@ class TopbarMessage extends Component {
           {demoMassage.map(massage => (
             <a className="isoDropdownListItem" key={massage.id}>
               <div className="isoImgWrapper">
-                <img alt="#" src={Image} />
+                
               </div>
 
               <div className="isoListContent">

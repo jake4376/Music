@@ -4,6 +4,12 @@ import { transition, borderRadius } from '../../config/style-util';
 import WithDirection from '../../config/withDirection';
 
 const SidebarWrapper = styled.div`
+
+  .kingImage {
+    width: 20px;
+    height: 20px;
+    margin-right: 30px;
+  }
   .isomorphicSidebar {
     z-index: 1000;
     background: ${palette('secondary', 0)};

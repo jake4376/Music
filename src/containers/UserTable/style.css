@@ -99,21 +99,14 @@
     background: none;
     outline:none;
     float:left;
-    padding: 0;
     color: white;
     font-size: 16px;
     /* transition: 0.4s; */
     line-height: 40px;
-    width: 240px;
+    width: 300px;
     margin-left: 3px;
+    padding-left: 15px;
 }
-
-/* @media screen and (max-width: 620px) {
-.searchBox:hover > .searchInput {
-    width: 150px;
-    padding: 0 6px;
-}
-} */
 .button_block {
     position: absolute;
     transform: translateY(60px);

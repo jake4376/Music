@@ -17,6 +17,11 @@ class AppRouter extends React.Component {
           path={`${url}/users`}
           component={asyncComponent(() => import('../UserTable'))}
         />
+        <Route
+          exact
+          path={`${url}/frame`}
+          component={asyncComponent(() => import('../Frameworks'))}
+        />
       </Switch>
     );
   }
