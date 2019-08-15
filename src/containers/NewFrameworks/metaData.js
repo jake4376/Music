@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import FrameWorks from './frameworks.style'
 import { Button, Input, Tooltip, Icon, Row, Col } from 'antd'
+import Data from './Data'
+import Content from './Content'
 
 export default class MetaData extends Component {
 	constructor (props) {
@@ -29,36 +31,18 @@ export default class MetaData extends Component {
 	}
 	render () {
 		const { name, creator, des } = this.state
-		const { items, content } = this.props
+		const { items, contents } = this.props
 		return (
 			<FrameWorks className="metaWrapper">
 				<Row>
 					<Col span={12} className='container'>
-						<span>Data Structure</span>
+						<span style={{fontSize: '25px', color: '#0000CD'}}>Data Structure</span>
 						<Row className="datawrapper">
 							<Col span={12}>
-								<div className="metaDataBox">
-									<div>Items Data</div>
-									<div>
-										{
-											items.map((val, index) => (
-												<div key={index}>
-													<div>{val.id}. {val.item}</div>
-													{
-														val.item_notes.map((value, key) => (
-															<div key={key}>{value.title}</div>
-														))
-													}
-												</div>
-											))
-										}
-									</div>
-								</div>
+								<Data items={items} />
 							</Col>
 							<Col span={12}>
-								<div className="metaDataBox">
-									<span>Contents Data</span>
-								</div>
+								<Content content={contents} />
 							</Col>
 						</Row>
 					</Col>
@@ -90,7 +74,10 @@ export default class MetaData extends Component {
 								</Tooltip>
 							}
 						/>
-						<Button type="primary" className="subSubmit" onClick={this.handleClick}>Submit</Button>
+						<div>
+							<Button type="primary" className="subSubmit" onClick={this.handleClick}>Submit</Button>
+							<Button className="backButton" onClick={this.props.router}><Icon type="left" />Back</Button>
+						</div>
 					</Col>
 				</Row>
 			</FrameWorks>

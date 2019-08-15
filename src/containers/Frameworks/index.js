@@ -1,51 +1,27 @@
 import React, { Component } from 'react'
-import FrameWorks from './frameworks.style'
-import { Row, Col } from 'antd'
+import View from './View'
+import Edit from '../NewFrameworks'
 
-import Contents from './practiceContents'
-import MetaData from './metaData'
-import Items from './practiceItems'
-import Data from './Data'
-
-class Edit extends Component {
-	constructor (props) {
+class Frameworks extends Component {
+	constructor(props) {
 		super(props)
 		this.state = {
-			data: {},
-			items: [],
-			metaData: {},
-			contents: []
+			pageload: 'view'
 		}
 	}
-	setItems = (data) => {
-		console.log(data)
-		this.setState({items: data})
-	}
-	setMetaData = (data) => {
-		this.setState({metaData: data})
+
+	handlePageLoad = (name) => {
+		this.setState({pageload: name})
 	}
 	render () {
-		console.log(this.state.items)
-		return (
-			<FrameWorks>
-				<Row>
-					<Col span={2}></Col>
-					<Col span={10}>
-						<Items setItems={this.setItems}/>
-					</Col>
-					<Col span={10}>
-						<Contents />
-					</Col>
-					<Col span={2}></Col>
-				</Row>
-				<Row>
-					<Col span={24}>
-						<MetaData setMetaData={this.setMetaData} items={this.state.items} contents={this.state.contents} />
-					</Col>
-				</Row>
-			</FrameWorks>
-		)
+		const { pageload } = this.state
+		if (pageload === 'view') {
+			return <View router={this.handlePageLoad}/>
+		} else if (pageload === 'new') {
+			return <Edit router={this.handlePageLoad} />
+		}
+		return <div>This is the page</div>
 	}
 }
 
-export default Edit
+export default Frameworks

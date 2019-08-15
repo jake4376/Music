@@ -18,6 +18,10 @@ export function clearUsers() {
   localStorage.removeItem('users');
 }
 
+export function clearFrame() {
+  localStorage.removeItem('frame')
+}
+
 export function getUsers() {
   try {
     const users = localStorage.getItem('users');
@@ -25,6 +29,16 @@ export function getUsers() {
   } catch (err) {
     clearUsers();
     return new Map();
+  }
+}
+
+export function getFrame() {
+  try {
+    const frame = localStorage.getItem('frame');
+    return new Map({frame})
+  } catch (err) {
+    clearFrame()
+    return new Map()
   }
 }
 

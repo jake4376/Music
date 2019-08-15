@@ -18,7 +18,7 @@ const FrameWorks = styled.div`
 	.title {
 		font-size: 20px;
 		margin-top: 20px;
-		color: red;
+		color: #0000CD;
 	}
 	.inputbox {
 		margin-top: 15px;
@@ -59,15 +59,48 @@ const FrameWorks = styled.div`
 		border: 1px solid rgba(0,0,0, 0.3);
 		border-radius: 10px;
 		padding: 10px;
-		height: 250px;
+		height: 217px;
 		width: 100%;
-		display: flex;
-		align-items: center;
-		flex-direction: column;
+		
 		overflow-y: auto;
 	}
 	.datawrapper {
 		width: 100%;
+		margin-top: 10px;
+	}
+	.contentCol {
+		padding-left: 10px !important;
+	}
+	.selectContent {
+		display: flex;
+		flex-direction: row;
+		margin-top: 15px;
+	}
+	.contentButton {
+		border-radius: 10px;
+		margin-left: 20px;
+	}
+	.dataStructure {
+		font-size: 18px;
+		text-align: center;
+		weight: 300;
+	}
+	.dataTitle {
+		font-size: 16px;
+		margin-left: 5px;
+		color: blue;
+	}
+	.dataContent {
+		margin-left: 15px;
+	}
+	.dataGroup {
+		border: 1px solid #000000;
+	}
+	.backButton {
+		border: none;
+		color: red;
+		margin-left: 10px;
+		font-size: 18px;
 	}
 `
 

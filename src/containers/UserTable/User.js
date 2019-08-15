@@ -162,7 +162,7 @@ class User extends Component {
 							</IsoWidgetsWrapper>
 						</Col>
 					</Row>
-					<Table data={data} column={column} page={page} prevpage={this.prevpage} nextpage={this.nextpage} />
+					<Table data={data} column={column} page={page} prevpage={this.prevpage} nextpage={this.nextpage} name={'practise'} />
 				</Content>
 			</Layout>
 		)

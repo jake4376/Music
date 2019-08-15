@@ -1,5 +1,6 @@
 import Auth from './auth/reducer';
 import Users from './users/reducer';
+import Frame from './frameworks/reducer'
 import App from './app/reducer';
 import Cards from './card/reducer';
 import DynamicChartComponent from './dynamicEchart/reducer';
@@ -15,5 +16,6 @@ export default {
   LanguageSwitcher,
   Cards,
   DynamicChartComponent,
-  Ecommerce
+  Ecommerce,
+  Frame
 };
