@@ -10,10 +10,10 @@ export const setdata = (data) => {
       creator: data.metadata.creator,
       id: ID,
       name: data.metadata.name,
-      url: downloadURL
+      url: downloadURL,
+      data: stringData
     }
     const value = db.ref('/frameworks/'+ID).set(req).then(() => {
-      console.log("success save data")
       return true
     }).catch((error) => {
       console.log(error)
@@ -35,6 +35,35 @@ export const getdata = () => {
   return result
 }
 
-export const getonedata = (data) => {
-  console.log(data)
+export const update = (data) => {
+  const value = storage.ref().child(data.present.metadata.id).delete().then(function() {
+    const result = storage.ref().child(data.present.metadata.id).putString(data.string).then(function(snapshot) {
+      return snapshot.ref.getDownloadURL()
+    }).then(downloadUrl => {
+      let req = {
+        name: data.present.metadata.name,
+        creator: data.present.metadata.creator,
+        id: data.present.metadata.id,
+        data: data.string,
+        url: downloadUrl
+      }
+      var updates = {}
+      updates[`${data.present.metadata.id}`] = req
+      db.ref('/frameworks').update(updates)
+      return true
+    }).catch((error) => {
+      console.log(error)
+    })
+    return result
+  })
+  return value
+}
+export const ondelete = (id) => {
+  const result = storage.ref().child(id).delete().then(function() {
+    const success = db.ref('/frameworks').child(id).remove().then(function() {
+      return true
+    })
+    return success
+  })
+  return result
 }

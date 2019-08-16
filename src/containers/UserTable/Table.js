@@ -14,15 +14,15 @@ class Table extends Component {
         if ( page === 0 ) {
             pre_button = true
         }
-        if ( data.length < 10) {
-            next_button = true
-        }
         if (column.length === 6) {
             buttonname='lpage'
         } else {
             buttonname='tpage'
         }
         if (name === 'frame') {
+            if (data.length < 5) {
+                next_button = true
+            }
             return (
                 <div>
                     <table className="customers" style={{marginTop: '5px !important'}}>
@@ -64,6 +64,9 @@ class Table extends Component {
                     </div>
                 </div>
             )
+        }
+        if ( data.length < 10) {
+            next_button = true
         }
         return (
             <div>

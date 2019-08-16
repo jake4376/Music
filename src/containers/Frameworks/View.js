@@ -1,13 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import frameActions from '../../redux/frameworks/actions'
-import { Layout, Modal } from 'antd'
+import { Layout, Modal, Row, Col, Button } from 'antd'
 
 import Table from '../UserTable/Table'
 import Find from '../UserTable/Find'
 import './style.css'
-
-const { getData } = frameActions;
 
 const column = [
 	{
@@ -28,15 +25,14 @@ class View extends Component {
 	constructor () {
 		super()
 		this.state = {
-			frame: [],
 			page: 0,
 			visible: false,
-			data: {}
+			present: {},
+			mid: {},
+			name: '',
+			editvisible: false,
+			oldData: ''
 		}
-	}
-
-	componentWillMount() {
-		this.props.getData();
 	}
 
 	shouldComponentUpdate (nextProps, nextState) {
@@ -47,10 +43,6 @@ class View extends Component {
     }
 	}
 	
-	componentDidMount() {
-		const { frame } = this.props
-		this.setState({frame})
-	}
 
 	prevpage = () => {
 		this.setState({page: this.state.page-1})
@@ -63,33 +55,69 @@ class View extends Component {
 		this.props.router('new')
 	}
 	handleEditData = (data) => {
-		fetch(data.url, {mode: 'no-cors'}).then(response => response.json()).then(res => {
-			console.log(res)
-		})
-		this.setState(data)
+		let result = JSON.parse(data.data)
+		this.setState({oldData: data.data})
+		result.metadata.id = data.id
+		result.metadata.data = data.data
+		this.setState({present: result})
 		this.showModal()
 	}
 	showModal = () => {
     this.setState({
       visible: true,
-    });
-  };
+    })
+  }
 
   handleOk = e => {
-    console.log(e);
+		const { oldData, present } = this.state
     this.setState({
       visible: false,
-    });
-  };
+		})
+		const metadata = {
+			name: present.metadata.name,
+			creator: present.metadata.creator,
+			other_as_needed: present.metadata.other_as_needed
+		}
+		const newData = {
+			metadata: metadata,
+			pack_practice_items: present.pack_practice_items,
+			pack_contents: present.pack_contents
+		}
+		const string = JSON.stringify(newData)
+		if (string !== oldData) {
+			const change = {
+				present: present,
+				string: string
+			}
+			this.props.change(change)
+		}
+  }
 
   handleCancel = e => {
-    console.log(e);
     this.setState({
       visible: false,
     });
-  };
+	}
+	editData = () => {
+		this.setState({
+      visible: false,
+		})
+		this.props.router('edit', this.state.present)
+	}
+	
+	handleChange = (editValue) => {
+		this.setState({present: editValue})
+	}
+	handleDelete = () => {
+		const { present } = this.state
+		this.props.delete(present.metadata.id)
+		this.setState({
+      visible: false,
+    });
+	}
 	render() {
-		const { frame, page } = this.state
+		const { page, present } = this.state
+		const { frame } = this.props
 		if (frame.length === 0) {
 			return <Find />
 		}
@@ -103,13 +131,86 @@ class View extends Component {
 					<Table data={data} column={column} page={page} prevpage={this.prevpage} nextpage={this.nextpage} name={'frame'} editData={this.handleEditData} />
 				</div>
 				<Modal
-					title="Edit Frameworks"
-					visible={this.state.visible}
-					onOk={this.handleOk}
-					onCancel={this.handleCancel}
+					title="View Frameworks"
+					visible={this.state.visible}			
+					className="modal_ContentSize"
+					footer={[
+            <Button key="Delete" onClick={this.handleDelete} type="danger">
+              Delete
+            </Button>,
+            <Button key="submit" type="primary" onClick={this.editData}>
+              Edit
+						</Button>,
+						<Button key="Return" onClick={this.handleCancel}>
+							Return
+						</Button>,
+          ]}
 				>
-					<p>fjeljfaljfelaf</p>
-					<p>feaojfleajflaejflejfl</p>
+					{
+						(!!present.metadata) && (<Row>
+							<Col span={8} className="mainCol">
+								<div className="presentTitle">MetaData</div>
+								<div className="presentContent"><span>Name: </span><span>{present.metadata.name}</span></div>
+								<div className="presentContent"><span>Creator: </span><span>{present.metadata.creator}</span></div>
+								<div className="presentContent"><span>Other_as_needed: </span><span>{present.metadata.other_as_needed}</span></div>
+							</Col>
+							<Col span={8} className="mainCol">
+								<div className="presentTitle">Practice Items</div>
+								{
+									present.pack_practice_items.map((val, index) => (
+										<div key={index} className="present1Content">
+											<div><span>Item: </span><span>{val.item}</span></div>
+											<div className="presentSubContent">
+												<span>list_notes: </span>
+												<div>
+													{
+														val.item_notes.map((value, key) => (
+															<div key={key} style={{marginLeft: '5px'}}>
+																<div><span>Title: </span><span>{value.title}</span></div>
+																<div><span>Details: </span><span>{value.details}</span></div>
+															</div>
+														))
+													}
+												</div>
+											</div>
+										</div>
+									))
+								}
+							</Col>
+							<Col span={8} className="mainCol">
+								<div className="presentTitle">Practice Contents</div>
+								{
+									present.pack_contents.map((val, index) => (
+										<div key={index} className="present1Content">
+											<div><span>Name: </span><span>{val.name}</span></div>
+											<div className="presentSubContent">
+												<span>List Items: </span>
+												{
+													val.list_items.map((value, key) => (
+														<div key={key} style={{marginLeft: '5px'}}>
+															<div><span>ID: </span><span>{value.id}</span></div>
+															<div><span>Timer: </span><span>{value.timer}</span></div>
+														</div>
+													))
+												}
+											</div>
+											<div className="presentSubContent">
+												<span>List Notes: </span>
+												{
+													val.list_notes.map((value, key) => (
+														<div key={key} style={{marginLeft: '5px'}}>
+															<div><span>Title: </span><span>{value.title}</span></div>
+															<div><span>Details: </span><span>{value.details}</span></div>
+														</div>
+													))
+												}
+											</div>
+										</div>
+									))
+								}
+							</Col>
+						</Row>)
+					}
 				</Modal>
 			</Layout>
 		)
@@ -118,8 +219,7 @@ class View extends Component {
 
 export default connect(
   state => ({
-		frame: state.Frame.get('frame'),
 		status: state.Frame.get('status')
   }),
-  { getData }
+  { }
 )(View);

@@ -8,7 +8,7 @@ import Contents from './practiceContents'
 import MetaData from './metaData'
 import Items from './practiceItems'
 
-const { setData } = frameActions
+const { setData, getData, getStatus } = frameActions
 
 class Edit extends Component {
 	constructor (props) {
@@ -32,6 +32,8 @@ class Edit extends Component {
 			pack_contents: contents
 		}
 		setData(result)
+		this.props.getStatus()
+		this.props.router('view')
 	}
 	setContent = (data) => {
 		const { contents } = this.state
@@ -69,5 +71,5 @@ export default connect(
   state => ({
     
   }),
-  { setData }
+  { setData, getData, getStatus }
 )(Edit);

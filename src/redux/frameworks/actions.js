@@ -3,8 +3,9 @@ const frameActions = {
 	SET_SUCCESS: 'SET_SUCCESS',
 	SET_ERROR: 'SET_ERROR',
 	GET_DATA: 'GET_DATA',
-	GET_ONEDATA: 'GET_ONEDATA',
 	GET_FRAMESUCCESS: 'GET_FRAMESUCCESS',
+	UPDATE: 'UPDATE',
+	DELETE: 'DELETE',
 	setData: (data) => ({
 		type: frameActions.SET_DATA,
 		data: data
@@ -12,9 +13,16 @@ const frameActions = {
 	getData: () => ({
 		type: frameActions.GET_DATA
 	}),
-	getOneData: (data) => ({
-		type: frameActions.GET_ONEDATA,
-		data: data
+	upDate: (change) => ({
+		type: frameActions.UPDATE,
+		data: change
+	}),
+	onDelete: (id) => ({
+		type: frameActions.DELETE,
+		id: id
+	}),
+	getStatus: () => ({
+		type: frameActions.SET_ERROR
 	})
 };
 

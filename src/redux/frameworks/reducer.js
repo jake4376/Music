@@ -1,5 +1,4 @@
 import { Map } from 'immutable';
-import { getUsers } from '../../helpers/utility';
 import actions from './actions';
 
 const initState = new Map({
@@ -8,7 +7,7 @@ const initState = new Map({
 });
 
 export default function authReducer(
-  state = initState.merge(getUsers()),
+  state = initState,
   action
 ) {
   switch (action.type) {

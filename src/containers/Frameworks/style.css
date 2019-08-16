@@ -13,3 +13,53 @@
 	background:#8B4513;
 	color: white;
 }
+.modal_ContentSize {
+	width: 1000px!important;
+	max-height: 700px!important;
+	overflow-y: auto;
+}
+
+.presentTitle {
+	font-size: 16px;
+	text-align: center;
+}
+.presentContent {
+	margin-left: 10px;
+	margin-top: 20px;
+}
+.present1Content {
+	border: 1px solid #111111;
+	border-radius: 10px;
+	margin-right: 10px;
+	margin-top: 5px;
+	padding: 5px 5px;
+}
+.presentSubContent {
+	display: flex;
+	flex-direction: row;
+}
+.mainCol {
+	height: 100% !important;
+}
+
+.noneInput {
+	outline: none;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+}
+.editBox {
+	margin-top: 10px;
+	display: flex;
+	flex-direction: row;
+}
+.editTitle {
+	width: 90px;
+}
+.modalboxsize {
+	max-height: 500px;
+	overflow: auto;
+}
+.modalsubContent {
+	margin-left: 20px;
+}
