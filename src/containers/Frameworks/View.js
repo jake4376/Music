@@ -31,7 +31,8 @@ class View extends Component {
 			mid: {},
 			name: '',
 			editvisible: false,
-			oldData: ''
+			oldData: '',
+			confirmvisible: false
 		}
 	}
 
@@ -42,7 +43,6 @@ class View extends Component {
       return true
     }
 	}
-	
 
 	prevpage = () => {
 		this.setState({page: this.state.page-1})
@@ -110,10 +110,17 @@ class View extends Component {
 	}
 	handleDelete = () => {
 		const { present } = this.state
+		this.setState({confirmvisible: false})
 		this.props.delete(present.metadata.id)
 		this.setState({
       visible: false,
     });
+	}
+	handleCancelConfirm = () => {
+		this.setState({confirmvisible: false})
+	}
+	showConfirm = () => {
+		this.setState({confirmvisible: true})
 	}
 	render() {
 		const { page, present } = this.state
@@ -135,7 +142,7 @@ class View extends Component {
 					visible={this.state.visible}			
 					className="modal_ContentSize"
 					footer={[
-            <Button key="Delete" onClick={this.handleDelete} type="danger">
+            <Button key="Delete" onClick={this.showConfirm} type="danger">
               Delete
             </Button>,
             <Button key="submit" type="primary" onClick={this.editData}>
@@ -212,6 +219,13 @@ class View extends Component {
 						</Row>)
 					}
 				</Modal>
+				<Modal
+          title="Are you sure delete this framework"
+          visible={this.state.confirmvisible}
+          onOk={this.handleDelete}
+          onCancel={this.handleCancelConfirm}
+        >
+        </Modal>
 			</Layout>
 		)
 	}
