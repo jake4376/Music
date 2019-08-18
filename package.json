@@ -2,6 +2,10 @@
   "name": "Modacity",
   "version": "2.4.0",
   "private": true,
+  "engines": {
+    "node": "10.16.0",
+    "npm": "6.10.1"
+  },
   "dependencies": {
     "antd": "^3.0.3",
     "antd-local-icon": "^0.1.3",
